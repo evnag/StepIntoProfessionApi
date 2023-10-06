@@ -1,0 +1,36 @@
+package com.stepintoprofession.registration_service.service;
+
+import com.stepintoprofession.registration_service.model.Intern;
+import com.stepintoprofession.registration_service.repository.InternRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class InternService {
+
+    private final InternRepository internRepository;
+
+    public InternService(InternRepository internRepository) {
+        this.internRepository = internRepository;
+    }
+
+    public Intern save(Intern intern) {
+        return internRepository.save(intern);
+    }
+
+    public List<Intern> findALL() {
+        return internRepository.findAll();
+    }
+
+    public Intern findByFirstNamesAndLastName(String firstName, String lastName) {
+        return internRepository.findByFirstNameEqualsAndLastNameEquals(firstName, lastName);
+    }
+
+    public ResponseEntity<Void> delete(Integer id) {
+        internRepository.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+}
