@@ -8,10 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Data
-//@RequiredArgsConstructor
-@NoArgsConstructor
 @Entity
 public class Address {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

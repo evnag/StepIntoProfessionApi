@@ -4,6 +4,7 @@ import com.github.javafaker.Faker;
 import com.stepintoprofession.registration_service.model.Address;
 import com.stepintoprofession.registration_service.model.Intern;
 import com.stepintoprofession.registration_service.repository.InternRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -12,16 +13,11 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Component
+@RequiredArgsConstructor
 public class SampleDataLoader implements CommandLineRunner {
 
     private final InternRepository internRepository;
     private final Faker faker;
-
-    public SampleDataLoader(InternRepository internRepository, Faker faker) {
-        this.internRepository = internRepository;
-        this.faker = faker;
-    }
-
 
     @Override
     public void run(String... args) throws Exception {

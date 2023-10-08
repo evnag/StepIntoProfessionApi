@@ -6,21 +6,20 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Data
-@NoArgsConstructor
-//@RequiredArgsConstructor
-@EqualsAndHashCode
 @Entity
 public class Intern {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String firstName;
     private String lastName;
     private String phoneNumber;
     private String email;
     private String gender;
     private Date birthday;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
