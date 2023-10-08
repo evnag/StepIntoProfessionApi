@@ -25,11 +25,13 @@ public class SampleDataLoader implements CommandLineRunner {
         List<Intern> interns = IntStream.range(0,10)
                 .mapToObj(i -> new Intern(
                         faker.name().firstName(),
+                        faker.name().nameWithMiddle(),
                         faker.name().lastName(),
                         faker.phoneNumber().phoneNumber(),
                         faker.internet().emailAddress(),
                         faker.demographic().sex(),
                         faker.date().birthday(),
+                        faker.job().position(),
                         new Address(
                                 faker.address().streetAddress(),
                                 faker.address().city(),
