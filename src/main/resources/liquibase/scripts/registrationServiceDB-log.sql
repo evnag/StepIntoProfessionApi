@@ -69,3 +69,10 @@ alter table mentor
 
 alter table recruiter
         alter column birthday type timestamp;
+
+-- changeSet evnag:6
+alter table mentor
+    add constraint fk_mentor_intern_id foreign key (intern_id) references intern (id);
+
+alter table recruiter
+    add constraint fk_recruiter_intern_id foreign key (intern_id) references recruiter (id);
