@@ -1,5 +1,6 @@
 package com.stepintoprofession.registration_service.service;
 
+import com.stepintoprofession.registration_service.exception.InternNotFoundException;
 import com.stepintoprofession.registration_service.model.Intern;
 import com.stepintoprofession.registration_service.repository.InternRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,11 +25,13 @@ public class InternService {
     }
 
     public Intern findByFirstNamesAndLastName(String firstName, String lastName) {
-        return internRepository.findByFirstNameEqualsAndLastNameEquals(firstName, lastName);
+        return internRepository.findByFirstNameEqualsAndLastNameEquals(firstName, lastName)
+                .orElseThrow(() -> new InternNotFoundException(firstName, lastName));
     }
 
     public ResponseEntity<Void> delete(Integer id) {
-        internRepository.deleteById(id);
+        Intern intern = internRepository.findById(id).orElseThrow(() -> new InternNotFoundException(id));
+        internRepository.delete(intern);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
