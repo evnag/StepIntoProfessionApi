@@ -2,10 +2,12 @@ package com.stepintoprofession.registration_service.model.dto;
 
 import lombok.Data;
 
+import java.util.UUID;
+
 @Data
 public class InternDto {
 
-    private Integer id;
+    private UUID id;
     private String firstName;
     private String middleName;
     private String lastName;
@@ -14,5 +16,5 @@ public class InternDto {
     private String gender;
     private String birthday;
     private String internship;
-    private Integer address;
+    private String address;
 }

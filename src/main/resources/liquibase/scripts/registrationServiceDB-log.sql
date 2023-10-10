@@ -3,7 +3,7 @@
 -- changeSet evnag:1
 create table address
 (
-    id        serial  not null primary key,
+    id        uuid  not null primary key,
     address varchar(100) not null,
     city varchar(100) not null,
     state  varchar(100) not null,
@@ -12,7 +12,7 @@ create table address
 
 create table intern
 (
-    id        serial  not null primary key,
+    id        uuid  not null primary key,
     first_name varchar(50) not null,
     middle_name varchar(50) not null,
     last_name  varchar(50) not null,
@@ -21,7 +21,7 @@ create table intern
     gender varchar(50),
     birthday date not null,
     internship text not null,
-    address_id int not null
+    address_id uuid not null
 );
 
 -- changeSet evnag:2
@@ -35,7 +35,7 @@ alter table intern
 -- changeSet evnag:4
 create table mentor
 (
-    id        serial  not null primary key,
+    id        uuid  not null primary key,
     first_name varchar(50) not null,
     middle_name varchar(50) not null,
     last_name  varchar(50) not null,
@@ -44,13 +44,13 @@ create table mentor
     gender varchar(50),
     birthday date not null,
     internship text not null,
-    address_id int not null,
-    intern_id int
+    address_id uuid not null,
+    intern_id uuid
 );
 
 create table recruiter
 (
-    id        serial  not null primary key,
+    id        uuid  not null primary key,
     first_name varchar(50) not null,
     middle_name varchar(50) not null,
     last_name  varchar(50) not null,
@@ -59,8 +59,8 @@ create table recruiter
     gender varchar(50),
     birthday date not null,
     internship text not null,
-    address_id int not null,
-    intern_id int
+    address_id uuid not null,
+    intern_id uuid
 );
 
 -- changeSet evnag:5
@@ -104,3 +104,7 @@ alter table recruiter
     drop column last_name;
 alter table recruiter
     add column full_name varchar(250);
+
+
+
+
