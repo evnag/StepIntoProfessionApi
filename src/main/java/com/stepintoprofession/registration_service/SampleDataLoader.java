@@ -1,8 +1,8 @@
 package com.stepintoprofession.registration_service;
 
 import com.github.javafaker.Faker;
-import com.stepintoprofession.registration_service.model.Address;
-import com.stepintoprofession.registration_service.model.Intern;
+import com.stepintoprofession.registration_service.model.entity.Address;
+import com.stepintoprofession.registration_service.model.entity.InternEntity;
 import com.stepintoprofession.registration_service.repository.InternRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -22,22 +22,20 @@ public class SampleDataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        List<Intern> interns = IntStream.range(0,10)
-                .mapToObj(i -> new Intern(
-                        faker.name().firstName(),
-                        faker.name().nameWithMiddle(),
-                        faker.name().lastName(),
+        List<InternEntity> interns = IntStream.range(0, 10)
+                .mapToObj(i -> new InternEntity(
+                        faker.name().fullName(),
                         faker.phoneNumber().phoneNumber(),
                         faker.internet().emailAddress(),
                         faker.demographic().sex(),
                         faker.date().birthday(),
-                        faker.job().position(),
                         new Address(
                                 faker.address().streetAddress(),
                                 faker.address().city(),
                                 faker.address().state(),
                                 faker.address().zipCode()
-                        )
+                        ),
+                        faker.job().position()
                 )).collect(Collectors.toList());
 
         internRepository.saveAll(interns);

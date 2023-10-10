@@ -1,41 +1,39 @@
-package com.stepintoprofession.registration_service.model;
+package com.stepintoprofession.registration_service.model.entity;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
+@SuperBuilder
 @NoArgsConstructor
-@Entity
-public class Intern {
+@AllArgsConstructor
+@MappedSuperclass
+public class BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String firstName;
-    private String middleName;
-    private String lastName;
+    private String fullName;
     private String phoneNumber;
     private String email;
     private String gender;
     private Date birthday;
-    private String internship;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
 
-    public Intern(String firstName, String middleName, String lastName, String phoneNumber, String email, String gender, Date birthday, String internship, Address address) {
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
+    public BaseEntity(String fullName, String phoneNumber, String email, String gender, Date birthday, Address address) {
+        this.fullName = fullName;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.gender = gender;
         this.birthday = birthday;
-        this.internship = internship;
         this.address = address;
     }
 }

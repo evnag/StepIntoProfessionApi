@@ -1,4 +1,4 @@
-package com.stepintoprofession.registration_service.model;
+package com.stepintoprofession.registration_service.model.entity;
 
 import lombok.*;
 

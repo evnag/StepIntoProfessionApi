@@ -76,3 +76,31 @@ alter table mentor
 
 alter table recruiter
     add constraint fk_recruiter_intern_id foreign key (intern_id) references recruiter (id);
+
+-- changeSet evnag:7
+alter table intern
+    drop column first_name;
+alter table intern
+    drop column middle_name;
+alter table intern
+    drop column last_name;
+alter table intern
+    add column full_name varchar(250);
+
+alter table mentor
+    drop column first_name;
+alter table mentor
+    drop column middle_name;
+alter table mentor
+    drop column last_name;
+alter table mentor
+    add column full_name varchar(250);
+
+alter table recruiter
+    drop column first_name;
+alter table recruiter
+    drop column middle_name;
+alter table recruiter
+    drop column last_name;
+alter table recruiter
+    add column full_name varchar(250);

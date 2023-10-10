@@ -1,6 +1,6 @@
 package com.stepintoprofession.registration_service.controller;
 
-import com.stepintoprofession.registration_service.model.Intern;
+import com.stepintoprofession.registration_service.model.entity.InternEntity;
 import com.stepintoprofession.registration_service.service.InternService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ public class InternController {
     private final InternService internService;
 
     @PostMapping
-    public ResponseEntity<Intern> add(@RequestBody Intern intern){
+    public ResponseEntity<InternEntity> add(@RequestBody InternEntity intern){
         return ResponseEntity.ok(internService.save(intern));
     }
 
@@ -26,17 +26,17 @@ public class InternController {
     }
 
     @PatchMapping("")
-    public ResponseEntity<Intern> update(@RequestBody Intern body) {
+    public ResponseEntity<InternEntity> update(@RequestBody InternEntity body) {
         return ResponseEntity.ok(internService.save(body));
     }
 
     @GetMapping
-    public List<Intern> findAll() {
+    public List<InternEntity> findAll() {
         return internService.findALL();
     }
 
-    @GetMapping("/findBy")
-    public Intern findBy(@RequestParam String firstName, @RequestParam String lastName) {
-        return internService.findByFirstNamesAndLastName(firstName, lastName);
-    }
+//    @GetMapping("/findBy")
+//    public InternEntity findBy(@RequestParam String firstName, @RequestParam String lastName) {
+//        return internService.findByFirstNamesAndLastName(firstName, lastName);
+//    }
 }
