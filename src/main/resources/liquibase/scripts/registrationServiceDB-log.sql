@@ -105,6 +105,22 @@ alter table recruiter
 alter table recruiter
     add column full_name varchar(250);
 
+-- changeSet evnag:8
+alter table address
+    drop column address,
+    drop column state,
+    add column region varchar(100),
+    add column street varchar(100),
+    add column building varchar(10),
+    add column apartment varchar(10);
+
+-- changeSet evnag:9
+alter table address
+    alter column region set not null,
+    alter column street set not null,
+    alter column building set not null,
+    alter column apartment set not null;
+
 
 
 

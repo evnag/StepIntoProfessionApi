@@ -17,15 +17,19 @@ public class Address {
     @GeneratedValue(generator = "uuid-hibernate-generator")
     @GenericGenerator(name = "uuid-hibernate-generator", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
-    private String address;
-    private String city;
-    private String state;
     private String zip;
+    private String city;
+    private String region;
+    private String street;
+    private String building;
+    private String apartment;
 
-    public Address(String address, String city, String state, String zip) {
-        this.address = address;
-        this.city = city;
-        this.state = state;
+    public Address(String zip, String city, String region, String street, String building, String apartment) {
         this.zip = zip;
+        this.city = city;
+        this.region = region;
+        this.street = street;
+        this.building = building;
+        this.apartment = apartment;
     }
 }

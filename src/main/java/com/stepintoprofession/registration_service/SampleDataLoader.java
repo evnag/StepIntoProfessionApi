@@ -30,10 +30,12 @@ public class SampleDataLoader implements CommandLineRunner {
                         faker.demographic().sex(),
                         faker.date().birthday(),
                         new Address(
-                                faker.address().streetAddress(),
+                                faker.address().zipCode(),
                                 faker.address().city(),
-                                faker.address().state(),
-                                faker.address().zipCode()
+                                faker.address().stateAbbr(),
+                                faker.address().streetName(),
+                                faker.address().buildingNumber(),
+                                faker.number().digit()
                         ),
                         faker.job().position()
                 )).collect(Collectors.toList());
