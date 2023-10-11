@@ -24,14 +24,15 @@ public class BaseEntity {
     private String fullName;
     private String phoneNumber;
     private String email;
-    private String gender;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
     private Date birthday;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
 
-    public BaseEntity(String fullName, String phoneNumber, String email, String gender, Date birthday, Address address) {
+    public BaseEntity(String fullName, String phoneNumber, String email, Gender gender, Date birthday, Address address) {
         this.fullName = fullName;
         this.phoneNumber = phoneNumber;
         this.email = email;

@@ -17,7 +17,7 @@ public class InternEntity extends BaseEntity {
 
     private String internship;
 
-    public InternEntity(String fullName, String phoneNumber, String email, String gender, Date birthday, Address address, String internship) {
+    public InternEntity(String fullName, String phoneNumber, String email, Gender gender, Date birthday, Address address, String internship) {
         super(fullName, phoneNumber, email, gender, birthday, address);
         this.internship = internship;
     }
