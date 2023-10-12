@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -16,12 +17,12 @@ public class InternController {
     private final InternService internService;
 
     @PostMapping
-    public ResponseEntity<InternEntity> add(@RequestBody InternEntity intern){
+    public ResponseEntity<InternEntity> add(@RequestBody InternEntity intern) {
         return ResponseEntity.ok(internService.save(intern));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+    public ResponseEntity<Void> delete(@PathVariable UUID id) {
         return internService.delete(id);
     }
 
@@ -34,9 +35,4 @@ public class InternController {
     public List<InternEntity> findAll() {
         return internService.findALL();
     }
-
-//    @GetMapping("/findBy")
-//    public InternEntity findBy(@RequestParam String firstName, @RequestParam String lastName) {
-//        return internService.findByFirstNamesAndLastName(firstName, lastName);
-//    }
 }
