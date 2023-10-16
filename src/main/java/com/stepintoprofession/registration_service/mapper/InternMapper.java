@@ -42,11 +42,16 @@ public interface InternMapper {
 
     default InternDto fullNameToDto(InternEntity intern) {
         int index = intern.getFullName().lastIndexOf(' ');
+        String[] partsOfName = intern.getFullName().split("\\s");
         InternDto internDto = new InternDto();
 
-        internDto.setLastName(intern.getFullName().substring(0, index));
-        internDto.setFirstName(intern.getFullName().substring(index + 1));
-        internDto.setMiddleName(intern.getFullName().substring(index + 2));
+        internDto.setLastName(partsOfName[0]);
+        internDto.setFirstName(partsOfName[1]);
+        if (partsOfName.length > 2) {
+            internDto.setMiddleName(partsOfName[2]);
+        } else {
+            internDto.setMiddleName("");
+        }
         return internDto;
     }
 
