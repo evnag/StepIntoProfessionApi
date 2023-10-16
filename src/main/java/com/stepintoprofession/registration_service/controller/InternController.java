@@ -1,5 +1,6 @@
 package com.stepintoprofession.registration_service.controller;
 
+import com.stepintoprofession.registration_service.model.dto.InternDto;
 import com.stepintoprofession.registration_service.model.entity.InternEntity;
 import com.stepintoprofession.registration_service.service.InternService;
 import lombok.RequiredArgsConstructor;
@@ -11,13 +12,13 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/interns")
+@RequestMapping("/api/v1/intern")
 public class InternController {
 
     private final InternService internService;
 
     @PostMapping
-    public ResponseEntity<InternEntity> add(@RequestBody InternEntity intern) {
+    public ResponseEntity<InternDto> add(@RequestBody InternEntity intern) {
         return ResponseEntity.ok(internService.save(intern));
     }
 
@@ -26,13 +27,18 @@ public class InternController {
         return internService.delete(id);
     }
 
-    @PatchMapping("")
-    public ResponseEntity<InternEntity> update(@RequestBody InternEntity body) {
+    @PatchMapping
+    public ResponseEntity<InternDto> update(@RequestBody InternEntity body) {
         return ResponseEntity.ok(internService.save(body));
     }
 
     @GetMapping
-    public List<InternEntity> findAll() {
+    public List<InternDto> findAll() {
         return internService.findALL();
+    }
+
+    @GetMapping("/internship")
+    public List<InternDto> findBy(String internship) {
+        return internService.findByInternShip(internship);
     }
 }

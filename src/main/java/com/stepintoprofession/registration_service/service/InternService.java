@@ -2,6 +2,8 @@ package com.stepintoprofession.registration_service.service;
 
 import com.stepintoprofession.registration_service.exception.ErrorCode;
 import com.stepintoprofession.registration_service.exception.RegistrationServiceException;
+import com.stepintoprofession.registration_service.mapper.InternMapper;
+import com.stepintoprofession.registration_service.model.dto.InternDto;
 import com.stepintoprofession.registration_service.model.entity.InternEntity;
 import com.stepintoprofession.registration_service.repository.InternRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,18 +19,23 @@ import java.util.UUID;
 public class InternService {
 
     private final InternRepository internRepository;
+    private final InternMapper mapper;
 
-    public InternEntity save(InternEntity intern) {
-        return internRepository.save(intern);
+    public InternDto save(InternEntity intern) {
+        return mapper.entityToDto(internRepository.save(intern));
     }
 
-    public List<InternEntity> findALL() {
-        return internRepository.findAll();
+    public List<InternDto> findALL() {
+        return mapper.listToListDto(internRepository.findAll());
     }
 
     public ResponseEntity<Void> delete(UUID id) {
         InternEntity intern = internRepository.findById(id).orElseThrow(() -> new RegistrationServiceException("User not found", ErrorCode.NOT_FOUND_ERROR));
         internRepository.delete(intern);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    public List<InternDto> findByInternShip(String internship) {
+        return mapper.listToListDto(internRepository.findByInternship(internship));
     }
 }
