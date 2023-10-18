@@ -155,7 +155,14 @@ alter table recruiter
     add column video_cv_path text,
     add column tilda_cv_path text;
 
+-- changeSet evnag:14
+alter table intern
+        alter column birthday type date;
 
+alter table mentor
+        alter column birthday type date;
 
+alter table recruiter
+        alter column birthday type date;
 
 

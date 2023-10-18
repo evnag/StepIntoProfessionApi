@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -43,7 +44,7 @@ public class SampleDataLoader implements CommandLineRunner {
                         faker.phoneNumber().phoneNumber(),
                         faker.internet().emailAddress(),
                         genders[RANDOM.nextInt(genders.length)],
-                        faker.date().birthday(),
+                        faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
                         new Address(
                                 faker.country().name(),
                                 faker.address().zipCode(),
@@ -53,7 +54,17 @@ public class SampleDataLoader implements CommandLineRunner {
                                 faker.address().buildingNumber(),
                                 faker.number().digit()
                         ),
-                        faker.job().position()
+                        faker.job().position(),
+                        faker.number().numberBetween(1, 3),
+                        faker.artist().name(),
+                        faker.nation().language(),
+                        faker.file().fileName(),
+                        faker.internet().url(),
+                        faker.internet().url(),
+                        seasons.stream()
+                                .skip((int) (seasons.size() * Math.random()))
+                                .findFirst().orElseThrow()
+
                 )).collect(Collectors.toList());
 
 

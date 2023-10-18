@@ -4,7 +4,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -29,8 +29,15 @@ public class InternEntity extends BaseEntity {
     @JoinColumn(name = "project_id")
     private ProjectSeason projectId;
 
-    public InternEntity(String fullName, String phoneNumber, String email, Gender gender, Date birthday, Address address, String internship) {
+    public InternEntity(String fullName, String phoneNumber, String email, Gender gender, LocalDate birthday, Address address, String internship, Integer disabilityGroup, String disabilityType, String languageSkill, String cvPath, String videoCvPath, String tildaCvPath, ProjectSeason projectId) {
         super(fullName, phoneNumber, email, gender, birthday, address);
         this.internship = internship;
+        this.disabilityGroup = disabilityGroup;
+        this.disabilityType = disabilityType;
+        this.languageSkill = languageSkill;
+        this.cvPath = cvPath;
+        this.videoCvPath = videoCvPath;
+        this.tildaCvPath = tildaCvPath;
+        this.projectId = projectId;
     }
 }

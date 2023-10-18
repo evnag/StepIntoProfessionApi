@@ -9,6 +9,8 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
@@ -24,12 +26,15 @@ public interface InternMapper {
     @Mapping(target = "lastName", expression = "java(fullNameToDto(intern).getLastName())")
     @Mapping(target = "firstName", expression = "java(fullNameToDto(intern).getFirstName())")
     @Mapping(target = "middleName", expression = "java(fullNameToDto(intern).getMiddleName())")
+    @Mapping(target = "age", expression = "java(calculateAge(intern.getBirthday()))")
+    @Mapping(target = "seasonNumber", source = "projectId.seasonNumber")
     @Named(value = "entityToDto")
     InternDto entityToDto(InternEntity intern);
 
     @Mapping(target = "fullName", source = ".")
     @Mapping(target = "address.id", source = "address")
     @Mapping(target = "gender", source = "gender")
+    @Mapping(target = "projectId.seasonNumber", source = "seasonNumber")
     InternEntity dtoToEntity(InternDto internDto);
 
     default String getValue(Gender gender) {
@@ -54,4 +59,7 @@ public interface InternMapper {
         return internDto;
     }
 
+    default String calculateAge(LocalDate birthDate) {
+        return String.valueOf(Period.between(birthDate, LocalDate.now()).getYears());
+    }
 }

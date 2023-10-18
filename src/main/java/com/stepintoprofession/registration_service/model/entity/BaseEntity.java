@@ -5,7 +5,7 @@ import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Getter
@@ -26,13 +26,13 @@ public class BaseEntity {
     private String email;
     @Enumerated(EnumType.STRING)
     private Gender gender;
-    private Date birthday;
+    private LocalDate birthday;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
 
-    public BaseEntity(String fullName, String phoneNumber, String email, Gender gender, Date birthday, Address address) {
+    public BaseEntity(String fullName, String phoneNumber, String email, Gender gender, LocalDate birthday, Address address) {
         this.fullName = fullName;
         this.phoneNumber = phoneNumber;
         this.email = email;

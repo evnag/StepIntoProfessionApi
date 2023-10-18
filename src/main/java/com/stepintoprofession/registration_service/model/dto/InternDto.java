@@ -17,4 +17,15 @@ public class InternDto {
     private String birthday;
     private String internship;
     private String address;
+    private String age;
+
+    private String disabilityGroup;
+    private String disabilityType;
+    private String languageSkill;
+
+    private String cvPath;
+    private String videoCvPath;
+    private String tildaCvPath;
+
+    private String seasonNumber;
 }
