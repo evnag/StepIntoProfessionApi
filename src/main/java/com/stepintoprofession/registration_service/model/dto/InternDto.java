@@ -17,7 +17,7 @@ public class InternDto {
     private String birthday;
     private String internship;
     private String address;
-    private String age;
+    private Integer age;
 
     private String disabilityGroup;
     private String disabilityType;

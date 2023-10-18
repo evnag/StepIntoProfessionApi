@@ -26,6 +26,7 @@ public interface InternMapper {
     @Mapping(target = "lastName", expression = "java(fullNameToDto(intern).getLastName())")
     @Mapping(target = "firstName", expression = "java(fullNameToDto(intern).getFirstName())")
     @Mapping(target = "middleName", expression = "java(fullNameToDto(intern).getMiddleName())")
+//    @Mapping(target = "birthday", source = "intern.birthday", dateFormat = "yyyy-MM-dd")
     @Mapping(target = "age", expression = "java(calculateAge(intern.getBirthday()))")
     @Mapping(target = "seasonNumber", source = "projectId.seasonNumber")
     @Named(value = "entityToDto")
@@ -59,7 +60,8 @@ public interface InternMapper {
         return internDto;
     }
 
-    default String calculateAge(LocalDate birthDate) {
-        return String.valueOf(Period.between(birthDate, LocalDate.now()).getYears());
+    default Integer calculateAge(LocalDate birthDate) {
+        return Period.between(birthDate, LocalDate.now()).getYears();
     }
+
 }
