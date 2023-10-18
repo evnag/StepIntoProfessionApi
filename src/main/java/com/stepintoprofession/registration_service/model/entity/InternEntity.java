@@ -16,6 +16,18 @@ import java.util.Date;
 public class InternEntity extends BaseEntity {
 
     private String internship;
+    private Integer disabilityGroup;
+    private String disabilityType;
+    private String languageSkill;
+
+    private String cvPath;
+    private String videoCvPath;
+    private String tildaCvPath;
+
+
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private ProjectSeason projectId;
 
     public InternEntity(String fullName, String phoneNumber, String email, Gender gender, Date birthday, Address address, String internship) {
         super(fullName, phoneNumber, email, gender, birthday, address);

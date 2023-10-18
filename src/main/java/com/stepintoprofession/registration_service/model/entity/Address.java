@@ -17,6 +17,7 @@ public class Address {
     @GeneratedValue(generator = "uuid-hibernate-generator")
     @GenericGenerator(name = "uuid-hibernate-generator", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
+    private String country;
     private String zip;
     private String city;
     private String region;
@@ -24,7 +25,8 @@ public class Address {
     private String building;
     private String apartment;
 
-    public Address(String zip, String city, String region, String street, String building, String apartment) {
+    public Address(String country, String zip, String city, String region, String street, String building, String apartment) {
+        this.country = country;
         this.zip = zip;
         this.city = city;
         this.region = region;

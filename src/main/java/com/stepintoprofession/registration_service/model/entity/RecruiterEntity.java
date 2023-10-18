@@ -20,4 +20,7 @@ public class RecruiterEntity extends BaseEntity {
     @JoinColumn(name = "intern_id", referencedColumnName = "id")
     private InternEntity intern;
 
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private ProjectSeason projectId;
 }

@@ -41,7 +41,6 @@ public interface InternMapper {
     }
 
     default InternDto fullNameToDto(InternEntity intern) {
-        int index = intern.getFullName().lastIndexOf(' ');
         String[] partsOfName = intern.getFullName().split("\\s");
         InternDto internDto = new InternDto();
 

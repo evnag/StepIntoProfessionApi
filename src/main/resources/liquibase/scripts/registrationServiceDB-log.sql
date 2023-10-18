@@ -121,6 +121,41 @@ alter table address
     alter column building set not null,
     alter column apartment set not null;
 
+ -- changeSet evnag:10
+create table project
+(
+    id        uuid  not null primary key,
+    season_number int not null,
+    start_date timestamp not null
+);
+
+ -- changeSet evnag:11
+alter table intern
+    add column project_id uuid,
+    add constraint fk_intern_project_id foreign key (project_id) references project(id);
+
+alter table mentor
+    add column project_id uuid,
+    add constraint fk_mentor_project_id foreign key (project_id) references project(id);
+
+alter table recruiter
+    add column project_id uuid,
+    add constraint fk_recruiter_project_id foreign key (project_id) references project(id);
+
+ -- changeSet evnag:12
+ alter table address
+    add column country varchar(250);
+
+ -- changeSet evnag:13
+ alter table intern
+    add column disability_group int,
+    add column disability_type varchar(250),
+    add column language_skill varchar(50),
+    add column cv_path text,
+    add column video_cv_path text,
+    add column tilda_cv_path text;
+
+
 
 
 
