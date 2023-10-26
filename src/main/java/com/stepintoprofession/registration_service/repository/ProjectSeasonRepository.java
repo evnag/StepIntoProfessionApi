@@ -8,4 +8,6 @@ import java.util.UUID;
 
 @Repository
 public interface ProjectSeasonRepository extends JpaRepository<ProjectSeason, UUID> {
+
+    ProjectSeason findProjectBySeasonNumber(Integer seasonNumber);
 }

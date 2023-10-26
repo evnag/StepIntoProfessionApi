@@ -27,11 +27,11 @@ public class ProjectSeason {
     private Integer seasonNumber;
     private Date startDate;
 
-    @OneToMany(mappedBy = "projectId", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "projectId")
     private List<InternEntity> interns;
-    @OneToMany(mappedBy = "projectId", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "projects")
     private List<MentorEntity> mentors;
-    @OneToMany(mappedBy = "projectId", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "projects")
     private List<RecruiterEntity> recruiters;
 
     public ProjectSeason(Integer seasonNumber, Date startDate) {

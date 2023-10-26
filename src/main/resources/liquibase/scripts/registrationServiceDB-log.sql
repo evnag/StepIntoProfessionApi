@@ -165,4 +165,44 @@ alter table mentor
 alter table recruiter
         alter column birthday type date;
 
+-- changeSet evnag:15
+alter table mentor
+        add column company varchar(250);
 
+alter table recruiter
+        add column company varchar(250);
+
+-- changeSet evnag:16
+alter table intern
+    drop constraint fk_intern_project_id,
+    drop column project_id;
+
+create table project_intern
+(
+    project_id uuid references project (id) on update cascade on delete cascade,
+    intern_id uuid references intern (id) on update cascade,
+    constraint project_intern_pkey primary key (project_id, intern_id)
+);
+
+-- changeSet evnag:17
+alter table mentor
+    drop constraint fk_mentor_project_id,
+    drop column project_id;
+
+create table project_mentor
+(
+    project_id uuid references project (id) on update cascade on delete cascade,
+    mentor_id uuid references mentor (id) on update cascade,
+    constraint project_mentor_pkey primary key (project_id, mentor_id)
+);
+
+alter table recruiter
+    drop constraint fk_recruiter_project_id,
+    drop column project_id;
+
+create table project_recruiter
+(
+    project_id uuid references project (id) on update cascade on delete cascade,
+    recruiter_id uuid references recruiter (id) on update cascade,
+    constraint project_recruiter_pkey primary key (project_id, recruiter_id)
+);

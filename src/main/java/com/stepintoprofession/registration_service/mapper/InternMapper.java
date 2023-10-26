@@ -1,67 +1,71 @@
 package com.stepintoprofession.registration_service.mapper;
 
 import com.stepintoprofession.registration_service.model.dto.InternDto;
-import com.stepintoprofession.registration_service.model.entity.Gender;
 import com.stepintoprofession.registration_service.model.entity.InternEntity;
-import org.mapstruct.IterableMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Named;
-import org.mapstruct.factory.Mappers;
+import com.stepintoprofession.registration_service.model.entity.ProjectSeason;
+import com.stepintoprofession.registration_service.repository.ProjectSeasonRepository;
+import org.mapstruct.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
-public interface InternMapper {
+public abstract class InternMapper implements BaseMapper {
 
-    InternMapper INSTANCE = Mappers.getMapper(InternMapper.class);
+//    InternMapper INSTANCE = Mappers.getMapper(InternMapper.class);
+
+    @Autowired
+    private ProjectSeasonRepository seasonRepository;
 
     @IterableMapping(qualifiedByName = "entityToDto")
-    List<InternDto> listToListDto(List<InternEntity> interns);
+    public abstract List<InternDto> listToListDto(List<InternEntity> interns);
 
     @Mapping(target = "address", source = "address.id")
-    @Mapping(target = "gender", expression = "java(getValue(intern.getGender()))")
-    @Mapping(target = "lastName", expression = "java(fullNameToDto(intern).getLastName())")
-    @Mapping(target = "firstName", expression = "java(fullNameToDto(intern).getFirstName())")
-    @Mapping(target = "middleName", expression = "java(fullNameToDto(intern).getMiddleName())")
-//    @Mapping(target = "birthday", source = "intern.birthday", dateFormat = "yyyy-MM-dd")
-    @Mapping(target = "age", expression = "java(calculateAge(intern.getBirthday()))")
-    @Mapping(target = "seasonNumber", source = "projectId.seasonNumber")
+    @Mapping(target = "gender", expression = "java(intern.getGender().name())")
+    @Mapping(target = "age", source = "birthday", qualifiedByName = "calculateAge")
+    @Mapping(target = "seasonNumber", source = "projectId", qualifiedByName = "projectListToListOfSeasonNumbers")
+    @Mapping(target = "firstName", ignore = true)
+    @Mapping(target = "middleName", ignore = true)
+    @Mapping(target = "lastName", ignore = true)
     @Named(value = "entityToDto")
-    InternDto entityToDto(InternEntity intern);
+    public abstract InternDto entityToDto(InternEntity intern);
 
     @Mapping(target = "fullName", source = ".")
     @Mapping(target = "address.id", source = "address")
     @Mapping(target = "gender", source = "gender")
-    @Mapping(target = "projectId.seasonNumber", source = "seasonNumber")
-    InternEntity dtoToEntity(InternDto internDto);
+    @Mapping(target = "projectId", source = "seasonNumber", qualifiedByName = "seasonNumbersToProjectSeasons")
+    public abstract InternEntity dtoToEntity(InternDto internDto);
 
-    default String getValue(Gender gender) {
-        return gender.name();
-    }
-
-    default String mapToFullName(InternDto internDto) {
+    String mapToFullName(InternDto internDto) {
         return internDto.getLastName() + " " + internDto.getFirstName() + " " + internDto.getMiddleName();
     }
 
-    default InternDto fullNameToDto(InternEntity intern) {
-        String[] partsOfName = intern.getFullName().split("\\s");
-        InternDto internDto = new InternDto();
-
-        internDto.setLastName(partsOfName[0]);
-        internDto.setFirstName(partsOfName[1]);
-        if (partsOfName.length > 2) {
-            internDto.setMiddleName(partsOfName[2]);
-        } else {
-            internDto.setMiddleName("");
-        }
-        return internDto;
+    @Named(value = "projectListToListOfSeasonNumbers")
+    List<String> projectListToListOfSeasonNumbers(List<ProjectSeason> projectSeasons) {
+        return projectSeasons.stream()
+                .map(p -> p.getSeasonNumber().toString())
+                .collect(Collectors.toList());
     }
 
-    default Integer calculateAge(LocalDate birthDate) {
-        return Period.between(birthDate, LocalDate.now()).getYears();
+    @Named(value = "seasonNumbersToProjectSeasons")
+    List<ProjectSeason> seasonNumbersToProjectSeasons(List<String> seasonNumbers) {
+        return seasonNumbers.stream()
+                .mapToInt(Integer::parseInt)
+                .mapToObj(seasonRepository::findProjectBySeasonNumber)
+                .collect(Collectors.toList());
+    }
+
+    @AfterMapping
+    void fullNameToDto(InternEntity intern, @MappingTarget InternDto dto) {
+        String[] partsOfName = intern.getFullName().split("\\s");
+        dto.setLastName(partsOfName[0]);
+        dto.setFirstName(partsOfName[1]);
+        if (partsOfName.length > 2) {
+            dto.setMiddleName(partsOfName[2]);
+        } else {
+            dto.setMiddleName("");
+        }
     }
 
 }

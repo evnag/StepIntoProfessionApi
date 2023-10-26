@@ -12,6 +12,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -31,6 +32,8 @@ public class SampleDataLoader implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         Gender[] genders = Gender.values();
+        List<String> languageSkills = new ArrayList<>();
+        languageSkills.add(faker.nation().language());
 
         List<ProjectSeason> seasons = IntStream.range(0, 15)
                 .mapToObj(s -> new ProjectSeason(
@@ -57,14 +60,12 @@ public class SampleDataLoader implements CommandLineRunner {
                         faker.job().position(),
                         faker.number().numberBetween(1, 3),
                         faker.artist().name(),
-                        faker.nation().language(),
+                        languageSkills,
                         faker.file().fileName(),
                         faker.internet().url(),
                         faker.internet().url(),
                         seasons.stream()
-                                .skip((int) (seasons.size() * Math.random()))
-                                .findFirst().orElseThrow()
-
+                                .skip((int) (seasons.size() * Math.random())).collect(Collectors.toList())
                 )).collect(Collectors.toList());
 
 

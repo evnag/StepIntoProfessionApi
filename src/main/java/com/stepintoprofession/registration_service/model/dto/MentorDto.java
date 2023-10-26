@@ -1,14 +1,12 @@
 package com.stepintoprofession.registration_service.model.dto;
 
-import lombok.Data;
+import lombok.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @Data
-public class InternDto {
+public class MentorDto {
 
-    private UUID id;
     private String firstName;
     private String middleName;
     private String lastName;
@@ -18,14 +16,6 @@ public class InternDto {
     private String birthday;
     private String internship;
     private String address;
-    private Integer age;
-
-    private String disabilityGroup;
-    private String disabilityType;
-    private List<String> languageSkill;
-
-    private String cvPath;
-    private String videoCvPath;
-    private String tildaCvPath;
+    private String intern;
     private List<String> seasonNumber;
 }
