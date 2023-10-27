@@ -2,21 +2,12 @@ package com.stepintoprofession.registration_service.mapper;
 
 import com.stepintoprofession.registration_service.model.dto.InternDto;
 import com.stepintoprofession.registration_service.model.entity.InternEntity;
-import com.stepintoprofession.registration_service.model.entity.ProjectSeason;
-import com.stepintoprofession.registration_service.repository.ProjectSeasonRepository;
 import org.mapstruct.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
-public abstract class InternMapper implements BaseMapper {
-
-//    InternMapper INSTANCE = Mappers.getMapper(InternMapper.class);
-
-    @Autowired
-    private ProjectSeasonRepository seasonRepository;
+public abstract class InternMapper extends BaseMapper {
 
     @IterableMapping(qualifiedByName = "entityToDto")
     public abstract List<InternDto> listToListDto(List<InternEntity> interns);
@@ -39,21 +30,6 @@ public abstract class InternMapper implements BaseMapper {
 
     String mapToFullName(InternDto internDto) {
         return internDto.getLastName() + " " + internDto.getFirstName() + " " + internDto.getMiddleName();
-    }
-
-    @Named(value = "projectListToListOfSeasonNumbers")
-    List<String> projectListToListOfSeasonNumbers(List<ProjectSeason> projectSeasons) {
-        return projectSeasons.stream()
-                .map(p -> p.getSeasonNumber().toString())
-                .collect(Collectors.toList());
-    }
-
-    @Named(value = "seasonNumbersToProjectSeasons")
-    List<ProjectSeason> seasonNumbersToProjectSeasons(List<String> seasonNumbers) {
-        return seasonNumbers.stream()
-                .mapToInt(Integer::parseInt)
-                .mapToObj(seasonRepository::findProjectBySeasonNumber)
-                .collect(Collectors.toList());
     }
 
     @AfterMapping

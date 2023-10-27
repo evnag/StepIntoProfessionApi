@@ -19,5 +19,7 @@ public class RecruiterDto {
     private String internship;
     private String address;
     private String intern;
+    private String age;
+    private String company;
     private List<String> seasonNumber;
 }

@@ -3,10 +3,12 @@ package com.stepintoprofession.registration_service.model.dto;
 import lombok.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Data
 public class MentorDto {
 
+    private UUID id;
     private String firstName;
     private String middleName;
     private String lastName;
@@ -17,5 +19,7 @@ public class MentorDto {
     private String internship;
     private String address;
     private String intern;
+    private Integer age;
+    private String company;
     private List<String> seasonNumber;
 }
