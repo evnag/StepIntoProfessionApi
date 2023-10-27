@@ -1,7 +1,6 @@
 package com.stepintoprofession.registration_service.controller;
 
 import com.stepintoprofession.registration_service.model.dto.InternDto;
-import com.stepintoprofession.registration_service.model.entity.InternEntity;
 import com.stepintoprofession.registration_service.service.InternService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +17,8 @@ public class InternController {
     private final InternService internService;
 
     @PostMapping
-    public ResponseEntity<InternDto> add(@RequestBody InternEntity intern) {
-        return ResponseEntity.ok(internService.save(intern));
+    public ResponseEntity<InternDto> add(@RequestBody InternDto dto) {
+        return ResponseEntity.ok(internService.save(dto));
     }
 
     @DeleteMapping("/{id}")
@@ -28,7 +27,7 @@ public class InternController {
     }
 
     @PatchMapping
-    public ResponseEntity<InternDto> update(@RequestBody InternEntity body) {
+    public ResponseEntity<InternDto> update(@RequestBody InternDto body) {
         return ResponseEntity.ok(internService.save(body));
     }
 

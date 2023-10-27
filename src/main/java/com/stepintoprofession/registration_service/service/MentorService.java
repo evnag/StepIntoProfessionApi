@@ -21,8 +21,8 @@ public class MentorService {
     private final MentorRepository mentorRepository;
     private final MentorMapper mapper;
 
-    public MentorDto save(MentorEntity mentor) {
-        return mapper.entityToDto(mentorRepository.save(mentor));
+    public MentorDto save(MentorDto dto) {
+        return mapper.entityToDto(mentorRepository.save(mapper.dtoToEntity(dto)));
     }
 
     public List<MentorDto> findALL() {

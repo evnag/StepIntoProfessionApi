@@ -12,7 +12,7 @@ public abstract class InternMapper extends BaseMapper {
     @IterableMapping(qualifiedByName = "entityToDto")
     public abstract List<InternDto> listToListDto(List<InternEntity> interns);
 
-    @Mapping(target = "address", source = "address.id")
+//    @Mapping(target = "address", source = "address.id")
     @Mapping(target = "gender", expression = "java(intern.getGender().name())")
     @Mapping(target = "age", source = "birthday", qualifiedByName = "calculateAge")
     @Mapping(target = "seasonNumber", source = "projectId", qualifiedByName = "projectListToListOfSeasonNumbers")
@@ -22,8 +22,9 @@ public abstract class InternMapper extends BaseMapper {
     @Named(value = "entityToDto")
     public abstract InternDto entityToDto(InternEntity intern);
 
+    @Mapping(target = "id", ignore = true)
     @Mapping(target = "fullName", source = ".")
-    @Mapping(target = "address.id", source = "address")
+//    @Mapping(target = "address.id", source = "address")
     @Mapping(target = "gender", source = "gender")
     @Mapping(target = "projectId", source = "seasonNumber", qualifiedByName = "seasonNumbersToProjectSeasons")
     public abstract InternEntity dtoToEntity(InternDto internDto);

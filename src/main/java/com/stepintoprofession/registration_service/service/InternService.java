@@ -21,8 +21,8 @@ public class InternService {
     private final InternRepository internRepository;
     private final InternMapper mapper;
 
-    public InternDto save(InternEntity intern) {
-        return mapper.entityToDto(internRepository.save(intern));
+    public InternDto save(InternDto dto) {
+        return mapper.entityToDto(internRepository.save(mapper.dtoToEntity(dto)));
     }
 
     public List<InternDto> findALL() {
@@ -39,28 +39,4 @@ public class InternService {
         return mapper.listToListDto(internRepository.findByInternship(internship));
     }
 
-//    private List<String> projectListToListOfSeasonNumbers(List<ProjectSeason> projectSeasons) {
-//        return projectSeasons.stream()
-//                .map(p -> p.getSeasonNumber().toString())
-//                .collect(Collectors.toList());
-//    }
-//
-//    private List<List<ProjectSeason>> getListOfSeasons(List<InternEntity> entityList) {
-//        return entityList.stream()
-//                .map(InternEntity::getProjectId).collect(Collectors.toList());
-//    }
-//
-//    private void setSeasonsToDtoList(List<InternDto> dtoList) {
-//        dtoList.forEach(dto -> dto.setSeasonNumber(
-//                internRepository.findAll().stream()
-//                        .map(intern -> projectListToListOfSeasonNumbers(intern.getProjectId()))
-//                        .findAny().orElse(null)));
-//    }
-//
-//    private List<ProjectSeason> seasonNumbersToProjectSeasons(List<String> seasonNumbers) {
-//        return seasonNumbers.stream()
-//                .mapToInt(Integer::parseInt)
-//                .mapToObj(seasonRepository::findProjectBySeasonNumber)
-//                .collect(Collectors.toList());
-//    }
 }

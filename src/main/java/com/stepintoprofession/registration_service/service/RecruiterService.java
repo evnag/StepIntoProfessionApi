@@ -21,8 +21,8 @@ public class RecruiterService {
     private final RecruiterRepository recruiterRepository;
     private final RecruiterMapper mapper;
 
-    public RecruiterDto save(RecruiterEntity recruiter) {
-        return mapper.entityToDto(recruiterRepository.save(recruiter));
+    public RecruiterDto save(RecruiterDto dto) {
+        return mapper.entityToDto(recruiterRepository.save(mapper.dtoToEntity(dto)));
     }
 
     public List<RecruiterDto> findALL() {
