@@ -1,5 +1,6 @@
 package com.stepintoprofession.registration_service.model.dto;
 
+import com.stepintoprofession.registration_service.model.entity.Address;
 import lombok.Data;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class RecruiterDto {
     private String gender;
     private String birthday;
     private String internship;
-    private String address;
+    private Address address;
     private String intern;
     private String age;
     private String company;

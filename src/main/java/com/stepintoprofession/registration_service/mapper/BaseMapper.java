@@ -22,6 +22,9 @@ public abstract class BaseMapper {
 
     @Named(value = "projectListToListOfSeasonNumbers")
     List<String> projectListToListOfSeasonNumbers(List<ProjectSeason> projectSeasons) {
+        if (projectSeasons == null) {
+            return null;
+        }
         return projectSeasons.stream()
                 .map(p -> p.getSeasonNumber().toString())
                 .collect(Collectors.toList());
@@ -29,6 +32,9 @@ public abstract class BaseMapper {
 
     @Named(value = "seasonNumbersToProjectSeasons")
     List<ProjectSeason> seasonNumbersToProjectSeasons(List<String> seasonNumbers) {
+        if (seasonNumbers == null) {
+            return null;
+        }
         return seasonNumbers.stream()
                 .mapToInt(Integer::parseInt)
                 .mapToObj(seasonRepository::findProjectBySeasonNumber)
