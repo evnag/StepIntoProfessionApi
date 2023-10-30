@@ -22,6 +22,7 @@ public abstract class RecruiterMapper extends BaseMapper {
     @Named(value = "entityToDto")
     public abstract RecruiterDto entityToDto(RecruiterEntity entity);
 
+    @Mapping(target = "id", ignore = true)
     @Mapping(target = "fullName", source = ".")
     @Mapping(target = "gender", source = "gender")
     @Mapping(target = "projects", source = "seasonNumber", qualifiedByName = "seasonNumbersToProjectSeasons")

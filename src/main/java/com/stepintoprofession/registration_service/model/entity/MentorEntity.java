@@ -4,8 +4,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -15,9 +18,12 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "mentor")
+@Validated
 public class MentorEntity extends BaseEntity {
 
+    @NotNull
     private String internship;
+    @NotNull
     private String company;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -29,6 +35,7 @@ public class MentorEntity extends BaseEntity {
             name = "project_mentor",
             joinColumns = @JoinColumn(name = "mentor_id"),
             inverseJoinColumns = @JoinColumn(name = "project_id"))
+    @NotEmpty(message = "Season list cannot be empty.")
     private List<ProjectSeason> projects;
 
     public MentorEntity(String fullName, String phoneNumber, String email, Gender gender, LocalDate birthday, Address address, String internship, String company, InternEntity intern, List<ProjectSeason> projects) {
