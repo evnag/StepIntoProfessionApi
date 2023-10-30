@@ -1,6 +1,7 @@
 package com.stepintoprofession.registration_service.model.dto;
 
 import com.stepintoprofession.registration_service.model.entity.Address;
+import com.stepintoprofession.registration_service.validate.DateFormat;
 import com.stepintoprofession.registration_service.validate.Phone;
 import lombok.Data;
 import org.springframework.validation.annotation.Validated;
@@ -8,7 +9,6 @@ import org.springframework.validation.annotation.Validated;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 import java.util.List;
 
 @Data
@@ -27,7 +27,7 @@ public class MentorDto {
     private String email;
     @NotNull
     private String gender;
-    @Past
+    @DateFormat(pattern = "yyyy-MM-dd")
     @NotNull
     private String birthday;
     @NotNull

@@ -3,7 +3,9 @@ package com.stepintoprofession.registration_service.controller;
 import com.stepintoprofession.registration_service.model.dto.MentorDto;
 import com.stepintoprofession.registration_service.service.MentorService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +19,7 @@ public class MentorController {
     private final MentorService mentorService;
 
     @PostMapping
-    public ResponseEntity<MentorDto> add(@RequestBody MentorDto dto) {
+    public ResponseEntity<MentorDto> add(@RequestBody @Validated MentorDto dto) {
         return ResponseEntity.ok(mentorService.save(dto));
     }
 
@@ -27,7 +29,7 @@ public class MentorController {
     }
 
     @PatchMapping
-    public ResponseEntity<MentorDto> update(@RequestBody MentorDto body) {
+    public ResponseEntity<MentorDto> update(@RequestBody @Validated MentorDto body) {
         return ResponseEntity.ok(mentorService.save(body));
     }
 
@@ -37,7 +39,7 @@ public class MentorController {
     }
 
     @GetMapping("/internship")
-    public List<MentorDto> findBy(String internship) {
+    public List<MentorDto> findBy(@Param("internship") String internship) {
         return mentorService.findByInternShip(internship);
     }
 }

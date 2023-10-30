@@ -3,7 +3,9 @@ package com.stepintoprofession.registration_service.controller;
 import com.stepintoprofession.registration_service.model.dto.InternDto;
 import com.stepintoprofession.registration_service.service.InternService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +19,7 @@ public class InternController {
     private final InternService internService;
 
     @PostMapping
-    public ResponseEntity<InternDto> add(@RequestBody InternDto dto) {
+    public ResponseEntity<InternDto> add(@RequestBody @Validated InternDto dto) {
         return ResponseEntity.ok(internService.save(dto));
     }
 
@@ -27,7 +29,7 @@ public class InternController {
     }
 
     @PatchMapping
-    public ResponseEntity<InternDto> update(@RequestBody InternDto body) {
+    public ResponseEntity<InternDto> update(@RequestBody @Validated InternDto body) {
         return ResponseEntity.ok(internService.save(body));
     }
 
@@ -37,7 +39,7 @@ public class InternController {
     }
 
     @GetMapping("/internship")
-    public List<InternDto> findBy(String internship) {
+    public List<InternDto> findBy(@Param("internship") String internship) {
         return internService.findByInternShip(internship);
     }
 }

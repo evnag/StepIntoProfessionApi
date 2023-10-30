@@ -1,6 +1,7 @@
 package com.stepintoprofession.registration_service.model.dto;
 
 import com.stepintoprofession.registration_service.model.entity.Address;
+import com.stepintoprofession.registration_service.validate.DateFormat;
 import lombok.Data;
 import org.springframework.validation.annotation.Validated;
 
@@ -26,7 +27,7 @@ public class RecruiterDto {
     private String email;
     @NotNull
     private String gender;
-    @Past
+    @DateFormat(pattern = "yyyy-MM-dd")
     @NotNull
     private String birthday;
     @NotNull
