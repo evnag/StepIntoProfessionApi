@@ -22,6 +22,9 @@ public class InternService {
     private final InternMapper mapper;
 
     public InternDto save(InternDto dto) {
+        if (dto == null) {
+            return null;
+        }
         return mapper.entityToDto(internRepository.save(mapper.dtoToEntity(dto)));
     }
 
@@ -36,7 +39,12 @@ public class InternService {
     }
 
     public List<InternDto> findByInternShip(String internship) {
-        return mapper.listToListDto(internRepository.findByInternship(internship));
+        List<InternEntity> entityList = internRepository.findByInternship(internship);
+        if (entityList != null) {
+            return mapper.listToListDto(entityList);
+        } else {
+            throw new RegistrationServiceException("No matches found", ErrorCode.NOT_FOUND_ERROR);
+        }
     }
 
 }
