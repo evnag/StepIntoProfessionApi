@@ -1,7 +1,9 @@
 package com.stepintoprofession.registration_service.model.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.springframework.validation.annotation.Validated;
 
@@ -11,6 +13,8 @@ import java.util.List;
 @Data
 @SuperBuilder
 @EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+@AllArgsConstructor
 @Validated
 public class InternDto extends ParticipantsDto {
 

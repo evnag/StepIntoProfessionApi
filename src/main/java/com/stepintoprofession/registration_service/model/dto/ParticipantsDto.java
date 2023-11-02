@@ -3,7 +3,9 @@ package com.stepintoprofession.registration_service.model.dto;
 import com.stepintoprofession.registration_service.model.entity.Address;
 import com.stepintoprofession.registration_service.validate.DateFormat;
 import com.stepintoprofession.registration_service.validate.Phone;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.springframework.validation.annotation.Validated;
 
@@ -14,6 +16,8 @@ import java.util.List;
 
 @Data
 @SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 @Validated
 public class ParticipantsDto {
 

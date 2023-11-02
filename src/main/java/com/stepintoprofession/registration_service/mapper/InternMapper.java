@@ -2,7 +2,10 @@ package com.stepintoprofession.registration_service.mapper;
 
 import com.stepintoprofession.registration_service.model.dto.InternDto;
 import com.stepintoprofession.registration_service.model.entity.Participants.InternEntity;
-import org.mapstruct.*;
+import org.mapstruct.IterableMapping;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Named;
 
 import java.util.List;
 
@@ -26,31 +29,5 @@ public abstract class InternMapper extends BaseMapper {
     @Mapping(target = "gender", source = "gender")
     @Mapping(target = "projectId", source = "seasonNumber", qualifiedByName = "seasonNumbersToProjectSeasons")
     public abstract InternEntity dtoToEntity(InternDto dto);
-
-    String mapToFullName(InternDto dto) {
-        if (dto == null) {
-            return null;
-        }
-        return dto.getLastName() + " " + dto.getFirstName() + " " + dto.getMiddleName();
-    }
-
-    @AfterMapping
-    void fullNameToDto(InternEntity entity, @MappingTarget InternDto dto) {
-        if (entity == null || dto == null) {
-            throw new RuntimeException("Parameters must not be null");
-        }
-        if (entity.getFullName() != null) {
-            String[] partsOfName = entity.getFullName().split("\\s");
-            dto.setLastName(partsOfName[0]);
-            dto.setFirstName(partsOfName[1]);
-            if (partsOfName.length > 2) {
-                dto.setMiddleName(partsOfName[2]);
-            } else {
-                dto.setMiddleName("");
-            }
-        } else {
-            throw new RuntimeException("Method entity.getFullName() returned the null value");
-        }
-    }
 
 }
