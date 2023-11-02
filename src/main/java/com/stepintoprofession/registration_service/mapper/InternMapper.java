@@ -1,7 +1,7 @@
 package com.stepintoprofession.registration_service.mapper;
 
 import com.stepintoprofession.registration_service.model.dto.InternDto;
-import com.stepintoprofession.registration_service.model.entity.InternEntity;
+import com.stepintoprofession.registration_service.model.entity.Participants.InternEntity;
 import org.mapstruct.*;
 
 import java.util.List;

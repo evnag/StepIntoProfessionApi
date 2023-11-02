@@ -4,7 +4,7 @@ import com.stepintoprofession.registration_service.exception.ErrorCode;
 import com.stepintoprofession.registration_service.exception.RegistrationServiceException;
 import com.stepintoprofession.registration_service.mapper.RecruiterMapper;
 import com.stepintoprofession.registration_service.model.dto.RecruiterDto;
-import com.stepintoprofession.registration_service.model.entity.RecruiterEntity;
+import com.stepintoprofession.registration_service.model.entity.Participants.RecruiterEntity;
 import com.stepintoprofession.registration_service.repository.RecruiterRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,9 +22,6 @@ public class RecruiterService {
     private final RecruiterMapper mapper;
 
     public RecruiterDto save(RecruiterDto dto) {
-        if (dto == null) {
-            return null;
-        }
         return mapper.entityToDto(recruiterRepository.save(mapper.dtoToEntity(dto)));
     }
 

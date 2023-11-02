@@ -1,4 +1,4 @@
-package com.stepintoprofession.registration_service.model.converter;
+package com.stepintoprofession.registration_service.utils.converter;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;

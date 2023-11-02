@@ -1,6 +1,10 @@
-package com.stepintoprofession.registration_service.model.entity;
+package com.stepintoprofession.registration_service.model.entity.Participants;
 
-import com.stepintoprofession.registration_service.model.converter.StringListConverter;
+import com.stepintoprofession.registration_service.model.entity.Address;
+import com.stepintoprofession.registration_service.model.entity.BaseEntity;
+import com.stepintoprofession.registration_service.model.entity.Gender;
+import com.stepintoprofession.registration_service.model.entity.ProjectSeason;
+import com.stepintoprofession.registration_service.utils.converter.StringListConverter;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.validation.annotation.Validated;
@@ -12,9 +16,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @SuperBuilder
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity

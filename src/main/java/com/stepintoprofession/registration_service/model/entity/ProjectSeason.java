@@ -1,9 +1,9 @@
 package com.stepintoprofession.registration_service.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.stepintoprofession.registration_service.model.entity.Participants.InternEntity;
+import com.stepintoprofession.registration_service.model.entity.Participants.MentorEntity;
+import com.stepintoprofession.registration_service.model.entity.Participants.RecruiterEntity;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.validation.annotation.Validated;
 
@@ -15,8 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity

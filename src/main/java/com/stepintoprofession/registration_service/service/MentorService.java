@@ -4,7 +4,7 @@ import com.stepintoprofession.registration_service.exception.ErrorCode;
 import com.stepintoprofession.registration_service.exception.RegistrationServiceException;
 import com.stepintoprofession.registration_service.mapper.MentorMapper;
 import com.stepintoprofession.registration_service.model.dto.MentorDto;
-import com.stepintoprofession.registration_service.model.entity.MentorEntity;
+import com.stepintoprofession.registration_service.model.entity.Participants.MentorEntity;
 import com.stepintoprofession.registration_service.repository.MentorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,9 +22,6 @@ public class MentorService {
     private final MentorMapper mapper;
 
     public MentorDto save(MentorDto dto) {
-        if (dto == null) {
-            return null;
-        }
         return mapper.entityToDto(mentorRepository.save(mapper.dtoToEntity(dto)));
     }
 

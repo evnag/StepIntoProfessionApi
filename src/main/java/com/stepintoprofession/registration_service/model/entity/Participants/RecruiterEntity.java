@@ -1,8 +1,13 @@
-package com.stepintoprofession.registration_service.model.entity;
+package com.stepintoprofession.registration_service.model.entity.Participants;
 
-import lombok.Getter;
+import com.stepintoprofession.registration_service.model.entity.Address;
+import com.stepintoprofession.registration_service.model.entity.BaseEntity;
+import com.stepintoprofession.registration_service.model.entity.Gender;
+import com.stepintoprofession.registration_service.model.entity.ProjectSeason;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.springframework.validation.annotation.Validated;
 
@@ -12,14 +17,15 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @SuperBuilder
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "mentor")
+@Table(name = "recruiter")
 @Validated
-public class MentorEntity extends BaseEntity {
+public class RecruiterEntity extends BaseEntity {
 
     @NotNull
     private String internship;
@@ -32,13 +38,13 @@ public class MentorEntity extends BaseEntity {
 
     @ManyToMany
     @JoinTable(
-            name = "project_mentor",
-            joinColumns = @JoinColumn(name = "mentor_id"),
+            name = "project_recruiter",
+            joinColumns = @JoinColumn(name = "recruiter_id"),
             inverseJoinColumns = @JoinColumn(name = "project_id"))
     @NotEmpty(message = "Season list cannot be empty.")
     private List<ProjectSeason> projects;
 
-    public MentorEntity(String fullName, String phoneNumber, String email, Gender gender, LocalDate birthday, Address address, String internship, String company, InternEntity intern, List<ProjectSeason> projects) {
+    public RecruiterEntity(String fullName, String phoneNumber, String email, Gender gender, LocalDate birthday, Address address, String internship, String company, InternEntity intern, List<ProjectSeason> projects) {
         super(fullName, phoneNumber, email, gender, birthday, address);
         this.internship = internship;
         this.company = company;

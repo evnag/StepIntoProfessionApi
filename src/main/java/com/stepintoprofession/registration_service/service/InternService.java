@@ -4,7 +4,7 @@ import com.stepintoprofession.registration_service.exception.ErrorCode;
 import com.stepintoprofession.registration_service.exception.RegistrationServiceException;
 import com.stepintoprofession.registration_service.mapper.InternMapper;
 import com.stepintoprofession.registration_service.model.dto.InternDto;
-import com.stepintoprofession.registration_service.model.entity.InternEntity;
+import com.stepintoprofession.registration_service.model.entity.Participants.InternEntity;
 import com.stepintoprofession.registration_service.repository.InternRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,9 +22,6 @@ public class InternService {
     private final InternMapper mapper;
 
     public InternDto save(InternDto dto) {
-        if (dto == null) {
-            return null;
-        }
         return mapper.entityToDto(internRepository.save(mapper.dtoToEntity(dto)));
     }
 
