@@ -5,9 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import org.springframework.validation.annotation.Validated;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
@@ -15,12 +13,9 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Validated
 public class InternDto extends ParticipantsDto {
 
-    @NotNull
     private String disabilityGroup;
-    @NotNull
     private String disabilityType;
     private List<String> languageSkill;
     private String cvPath;

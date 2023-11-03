@@ -30,7 +30,7 @@ public class InternController {
 
     @PatchMapping
     public ResponseEntity<InternDto> update(@RequestBody @Validated InternDto body) {
-        return ResponseEntity.ok(internService.save(body));
+        return ResponseEntity.ok(internService.updateIntern(body));
     }
 
     @GetMapping

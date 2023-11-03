@@ -10,7 +10,6 @@ import lombok.experimental.SuperBuilder;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -31,16 +30,11 @@ public class ParticipantsDto {
     private String phoneNumber;
     @Email(message = "Email address has invalid format: ${validatedValue}")
     private String email;
-    @NotNull
     private String gender;
     @DateFormat(pattern = "yyyy-MM-dd")
-    @NotNull
     private String birthday;
-    @NotNull
     private String internship;
-    @NotNull
     private Address address;
     private Integer age;
-    @NotEmpty(message = "Season list cannot be empty.")
     private List<String> seasonNumber;
 }

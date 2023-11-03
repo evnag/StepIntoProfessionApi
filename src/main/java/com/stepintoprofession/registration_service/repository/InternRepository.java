@@ -5,10 +5,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 public interface InternRepository extends JpaRepository<InternEntity, UUID> {
 
     List<InternEntity> findByInternship(String internship);
+
+    Optional<InternEntity> findByPhoneNumber(String phoneNumber);
 }

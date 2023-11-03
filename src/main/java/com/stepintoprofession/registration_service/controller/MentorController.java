@@ -30,7 +30,7 @@ public class MentorController {
 
     @PatchMapping
     public ResponseEntity<MentorDto> update(@RequestBody @Validated MentorDto body) {
-        return ResponseEntity.ok(mentorService.save(body));
+        return ResponseEntity.ok(mentorService.updateMentor(body));
     }
 
     @GetMapping

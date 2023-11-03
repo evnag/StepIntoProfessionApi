@@ -2,10 +2,7 @@ package com.stepintoprofession.registration_service.mapper;
 
 import com.stepintoprofession.registration_service.model.dto.RecruiterDto;
 import com.stepintoprofession.registration_service.model.entity.Participants.RecruiterEntity;
-import org.mapstruct.IterableMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Named;
+import org.mapstruct.*;
 
 import java.util.List;
 
@@ -32,4 +29,10 @@ public abstract class RecruiterMapper extends BaseMapper {
     @Mapping(target = "intern.id", source = "intern")
     public abstract RecruiterEntity dtoToEntity(RecruiterDto dto);
 
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "fullName", source = ".")
+    @Mapping(target = "projects", source = "seasonNumber", qualifiedByName = "seasonNumbersToProjectSeasons")
+    @Mapping(target = "intern.id", source = "intern")
+    public abstract void updateEntityFromDto(RecruiterDto dto, @MappingTarget RecruiterEntity entity);
 }

@@ -44,4 +44,11 @@ public class InternService {
         }
     }
 
+    public InternDto updateIntern(InternDto dto) {
+        InternEntity entity = internRepository.findByPhoneNumber(dto.getPhoneNumber()).orElseThrow(() -> new RegistrationServiceException("User with phone number: " + dto.getPhoneNumber() + " not found", ErrorCode.NOT_FOUND_ERROR));
+        mapper.updateEntityFromDto(dto, entity);
+        internRepository.save(entity);
+        return mapper.entityToDto(entity);
+    }
+
 }

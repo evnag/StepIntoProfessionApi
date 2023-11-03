@@ -42,7 +42,12 @@ public class MentorService {
         } else {
             throw new RegistrationServiceException("No matches found", ErrorCode.NOT_FOUND_ERROR);
         }
-
     }
 
+    public MentorDto updateMentor(MentorDto dto) {
+        MentorEntity entity = mentorRepository.findByPhoneNumber(dto.getPhoneNumber()).orElseThrow(() -> new RegistrationServiceException("Mentor with phone number: " + dto.getPhoneNumber() + " not found", ErrorCode.NOT_FOUND_ERROR));
+        mapper.updateEntityFromDto(dto, entity);
+        mentorRepository.save(entity);
+        return mapper.entityToDto(entity);
+    }
 }

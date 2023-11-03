@@ -30,7 +30,7 @@ public class RecruiterController {
 
     @PatchMapping
     public ResponseEntity<RecruiterDto> update(@RequestBody @Validated RecruiterDto body) {
-        return ResponseEntity.ok(recruiterService.save(body));
+        return ResponseEntity.ok(recruiterService.updateRecruiter(body));
     }
 
     @GetMapping

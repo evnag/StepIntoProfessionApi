@@ -43,4 +43,11 @@ public class RecruiterService {
             throw new RegistrationServiceException("No matches found", ErrorCode.NOT_FOUND_ERROR);
         }
     }
+
+    public RecruiterDto updateRecruiter(RecruiterDto dto) {
+        RecruiterEntity entity = recruiterRepository.findByPhoneNumber(dto.getPhoneNumber()).orElseThrow(() -> new RegistrationServiceException("Recruiter with phone number: " + dto.getPhoneNumber() + " not found", ErrorCode.NOT_FOUND_ERROR));
+        mapper.updateEntityFromDto(dto, entity);
+        recruiterRepository.save(entity);
+        return mapper.entityToDto(entity);
+    }
 }
