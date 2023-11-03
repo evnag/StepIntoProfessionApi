@@ -30,7 +30,7 @@ public class MentorService {
     }
 
     public ResponseEntity<Void> delete(UUID id) {
-        MentorEntity mentor = mentorRepository.findById(id).orElseThrow(() -> new RegistrationServiceException("User not found", ErrorCode.NOT_FOUND_ERROR));
+        MentorEntity mentor = mentorRepository.findById(id).orElseThrow(() -> new RegistrationServiceException("Mentor with id: " + id + " not found", ErrorCode.NOT_FOUND_ERROR));
         mentorRepository.delete(mentor);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -40,7 +40,7 @@ public class MentorService {
         if (entityList != null) {
             return mapper.listToListDto(entityList);
         } else {
-            throw new RegistrationServiceException("No matches found", ErrorCode.NOT_FOUND_ERROR);
+            throw new RegistrationServiceException("No matches found", ErrorCode.NO_MATCHES_FOUND_ERROR);
         }
     }
 

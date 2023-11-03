@@ -5,10 +5,8 @@ import lombok.Getter;
 @Getter
 public enum ErrorCode {
 
-    BAD_REQUEST_ERROR(400),
-    UNAUTHORISED_ERROR(401),
-    FORBIDDEN_ERROR(403),
-    NOT_FOUND_ERROR(404);
+    NOT_FOUND_ERROR(1),
+    NO_MATCHES_FOUND_ERROR(2);
 
     private final int code;
 

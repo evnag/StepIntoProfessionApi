@@ -30,7 +30,7 @@ public class RecruiterService {
     }
 
     public ResponseEntity<Void> delete(UUID id) {
-        RecruiterEntity recruiter = recruiterRepository.findById(id).orElseThrow(() -> new RegistrationServiceException("User not found", ErrorCode.NOT_FOUND_ERROR));
+        RecruiterEntity recruiter = recruiterRepository.findById(id).orElseThrow(() -> new RegistrationServiceException("Recruiter with id: " + id + " not found", ErrorCode.NOT_FOUND_ERROR));
         recruiterRepository.delete(recruiter);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -40,7 +40,7 @@ public class RecruiterService {
         if (entityList != null) {
             return mapper.listToListDto(entityList);
         } else {
-            throw new RegistrationServiceException("No matches found", ErrorCode.NOT_FOUND_ERROR);
+            throw new RegistrationServiceException("No matches found", ErrorCode.NO_MATCHES_FOUND_ERROR);
         }
     }
 
