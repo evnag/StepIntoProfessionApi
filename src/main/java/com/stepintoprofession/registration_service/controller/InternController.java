@@ -29,8 +29,8 @@ public class InternController {
     }
 
     @PatchMapping
-    public ResponseEntity<InternDto> update(@RequestBody @Validated InternDto body) {
-        return ResponseEntity.ok(internService.updateIntern(body));
+    public ResponseEntity<InternDto> update(@RequestBody @Validated InternDto dto) {
+        return ResponseEntity.ok(internService.updateIntern(dto));
     }
 
     @GetMapping

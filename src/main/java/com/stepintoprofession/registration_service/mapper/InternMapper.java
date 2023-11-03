@@ -28,6 +28,8 @@ public abstract class InternMapper extends BaseMapper {
     public abstract InternEntity dtoToEntity(InternDto dto);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "projectId", source = "seasonNumber", qualifiedByName = "seasonNumbersToProjectSeasons")
     @Mapping(target = "fullName", source = ".")
     public abstract void updateEntityFromDto(InternDto dto, @MappingTarget InternEntity entity);
 }

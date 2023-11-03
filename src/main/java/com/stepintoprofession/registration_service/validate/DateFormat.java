@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = CheckDateValidator.class)
 public @interface DateFormat {
 
-    String message() default "{message.key}";
+    String message() default "Date format is not valid. Try yyyy-MM-dd";
 
     Class<?>[] groups() default { };
 

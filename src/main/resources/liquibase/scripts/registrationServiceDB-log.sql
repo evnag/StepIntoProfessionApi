@@ -206,3 +206,7 @@ create table project_recruiter
     recruiter_id uuid references recruiter (id) on update cascade,
     constraint project_recruiter_pkey primary key (project_id, recruiter_id)
 );
+
+-- changeSet evnag:18
+alter table project
+    alter column start_date type date;
