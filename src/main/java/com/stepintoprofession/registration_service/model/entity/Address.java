@@ -7,7 +7,7 @@ import org.springframework.validation.annotation.Validated;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 import java.util.UUID;
 
 @Data
@@ -20,19 +20,19 @@ public class Address {
     @GeneratedValue(generator = "uuid-hibernate-generator")
     @GenericGenerator(name = "uuid-hibernate-generator", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
-    @NotNull
+    @NotBlank
     private String country;
-    @NotNull
+    @NotBlank
     private String zip;
-    @NotNull
+    @NotBlank
     private String city;
-    @NotNull
+    @NotBlank
     private String region;
-    @NotNull
+    @NotBlank
     private String street;
-    @NotNull
+    @NotBlank
     private String building;
-    @NotNull
+    @NotBlank
     private String apartment;
 
     public Address(String country, String zip, String city, String region, String street, String building, String apartment) {

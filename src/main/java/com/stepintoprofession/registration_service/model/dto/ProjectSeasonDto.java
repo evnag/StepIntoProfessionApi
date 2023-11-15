@@ -19,4 +19,6 @@ public class ProjectSeasonDto {
     @NotNull
     @DateFormat(pattern = "yyyy-MM-dd")
     private String startDate;
+    @DateFormat(pattern = "yyyy-MM-dd")
+    private String endDate;
 }

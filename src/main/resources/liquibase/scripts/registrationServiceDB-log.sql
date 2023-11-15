@@ -210,3 +210,7 @@ create table project_recruiter
 -- changeSet evnag:18
 alter table project
     alter column start_date type date;
+
+-- changeSet evnag:19
+alter table project
+    add column end_date date;

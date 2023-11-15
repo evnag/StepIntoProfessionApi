@@ -1,6 +1,5 @@
 package com.stepintoprofession.registration_service.model.dto;
 
-import com.stepintoprofession.registration_service.model.entity.Address;
 import com.stepintoprofession.registration_service.validate.DateFormat;
 import com.stepintoprofession.registration_service.validate.Phone;
 import lombok.AllArgsConstructor;
@@ -34,7 +33,7 @@ public class ParticipantsDto {
     @DateFormat(pattern = "yyyy-MM-dd")
     private String birthday;
     private String internship;
-    private Address address;
+    private AddressDto address;
     private Integer age;
     private List<String> seasonNumber;
 }

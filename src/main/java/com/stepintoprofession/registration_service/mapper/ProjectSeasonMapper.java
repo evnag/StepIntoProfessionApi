@@ -16,6 +16,7 @@ public interface ProjectSeasonMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "startDate", source = "dto.startDate", dateFormat = "yyyy-MM-dd")
+    @Mapping(target = "endDate", source = "dto.endDate", dateFormat = "yyyy-MM-dd")
     ProjectSeason dtoToEntity(ProjectSeasonDto dto);
 
     List<ProjectSeasonDto> listToListDto(List<ProjectSeason> seasons);

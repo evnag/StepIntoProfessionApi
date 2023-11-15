@@ -10,7 +10,6 @@ import org.hibernate.annotations.GenericGenerator;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
 import java.util.List;
@@ -28,10 +27,12 @@ public class ProjectSeason {
     @GeneratedValue(generator = "uuid-hibernate-generator")
     @GenericGenerator(name = "uuid-hibernate-generator", strategy = "org.hibernate.id.UUIDGenerator")
     private UUID id;
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer seasonNumber;
     @PastOrPresent
     private LocalDate startDate;
+    private LocalDate endDate;
+
 
     @ManyToMany(mappedBy = "projectId")
 //    @NotEmpty(message = "Interns list cannot be empty.")
