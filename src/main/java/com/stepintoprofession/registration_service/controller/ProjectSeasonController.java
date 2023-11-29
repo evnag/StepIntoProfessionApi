@@ -8,7 +8,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,9 +21,9 @@ public class ProjectSeasonController {
         return ResponseEntity.ok(seasonService.save(dto));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable UUID id) {
-        return seasonService.delete(id);
+    @DeleteMapping("/{seasonNumber}")
+    public ResponseEntity<Void> delete(@PathVariable Integer seasonNumber) {
+        return seasonService.delete(seasonNumber);
     }
 
     @PatchMapping

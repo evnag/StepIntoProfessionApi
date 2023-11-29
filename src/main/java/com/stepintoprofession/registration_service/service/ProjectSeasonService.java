@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -29,10 +28,17 @@ public class ProjectSeasonService {
         return mapper.listToListDto(seasonRepository.findAll());
     }
 
-    public ResponseEntity<Void> delete(UUID id) {
-        ProjectSeason season = seasonRepository.findById(id)
+    public ProjectSeasonDto getProjectSeason(Integer seasonNumber) {
+        ProjectSeason season = seasonRepository.findBySeasonNumber(seasonNumber)
                 .orElseThrow(() -> new RegistrationServiceException(ErrorCode.SEASON_NOT_FOUND_ERROR
-                        .getErrorMessage(id.toString()), ErrorCode.SEASON_NOT_FOUND_ERROR));
+                        .getErrorMessage(seasonNumber.toString()), ErrorCode.SEASON_NOT_FOUND_ERROR));
+        return mapper.entityToDto(season);
+    }
+
+    public ResponseEntity<Void> delete(Integer seasonNumber) {
+        ProjectSeason season = seasonRepository.findBySeasonNumber(seasonNumber)
+                .orElseThrow(() -> new RegistrationServiceException(ErrorCode.SEASON_NOT_FOUND_ERROR
+                        .getErrorMessage(seasonNumber.toString()), ErrorCode.SEASON_NOT_FOUND_ERROR));
         seasonRepository.delete(season);
         return new ResponseEntity<>(HttpStatus.OK);
     }
