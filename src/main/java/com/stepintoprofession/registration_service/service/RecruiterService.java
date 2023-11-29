@@ -30,7 +30,9 @@ public class RecruiterService {
     }
 
     public ResponseEntity<Void> delete(UUID id) {
-        RecruiterEntity recruiter = recruiterRepository.findById(id).orElseThrow(() -> new RegistrationServiceException("Recruiter with id: " + id + " not found", ErrorCode.NOT_FOUND_ERROR));
+        RecruiterEntity recruiter = recruiterRepository.findById(id)
+                .orElseThrow(() -> new RegistrationServiceException(ErrorCode.RECRUITER_NOT_FOUND_ERROR
+                        .getErrorMessage(id.toString()), ErrorCode.RECRUITER_NOT_FOUND_ERROR));
         recruiterRepository.delete(recruiter);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -40,12 +42,15 @@ public class RecruiterService {
         if (entityList != null) {
             return mapper.listToListDto(entityList);
         } else {
-            throw new RegistrationServiceException("No matches found", ErrorCode.NO_MATCHES_FOUND_ERROR);
+            throw new RegistrationServiceException(ErrorCode.NO_MATCHES_FOUND_ERROR
+                    .getErrorMessage(""), ErrorCode.NO_MATCHES_FOUND_ERROR);
         }
     }
 
     public RecruiterDto updateRecruiter(RecruiterDto dto) {
-        RecruiterEntity entity = recruiterRepository.findByPhoneNumber(dto.getPhoneNumber()).orElseThrow(() -> new RegistrationServiceException("Recruiter with phone number: " + dto.getPhoneNumber() + " not found", ErrorCode.NOT_FOUND_ERROR));
+        RecruiterEntity entity = recruiterRepository.findByPhoneNumber(dto.getPhoneNumber())
+                .orElseThrow(() -> new RegistrationServiceException(ErrorCode.RECRUITER_NOT_FOUND_ERROR
+                        .getErrorMessage(dto.getPhoneNumber()), ErrorCode.RECRUITER_NOT_FOUND_ERROR));
         mapper.updateEntityFromDto(dto, entity);
         recruiterRepository.save(entity);
         return mapper.entityToDto(entity);

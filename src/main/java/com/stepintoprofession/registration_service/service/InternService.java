@@ -30,7 +30,9 @@ public class InternService {
     }
 
     public ResponseEntity<Void> delete(UUID id) {
-        InternEntity intern = internRepository.findById(id).orElseThrow(() -> new RegistrationServiceException("Intern with id: " + id + " not found", ErrorCode.NOT_FOUND_ERROR));
+        InternEntity intern = internRepository.findById(id)
+                .orElseThrow(() -> new RegistrationServiceException(ErrorCode.INTERN_NOT_FOUND_ERROR
+                        .getErrorMessage(id.toString()), ErrorCode.INTERN_NOT_FOUND_ERROR));
         internRepository.delete(intern);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -40,12 +42,15 @@ public class InternService {
         if (entityList != null) {
             return mapper.listToListDto(entityList);
         } else {
-            throw new RegistrationServiceException("No matches found", ErrorCode.NO_MATCHES_FOUND_ERROR);
+            throw new RegistrationServiceException(ErrorCode.NO_MATCHES_FOUND_ERROR
+                    .getErrorMessage(""), ErrorCode.NO_MATCHES_FOUND_ERROR);
         }
     }
 
     public InternDto updateIntern(InternDto dto) {
-        InternEntity entity = internRepository.findByPhoneNumber(dto.getPhoneNumber()).orElseThrow(() -> new RegistrationServiceException("Intern with phone number: " + dto.getPhoneNumber() + " not found", ErrorCode.NOT_FOUND_ERROR));
+        InternEntity entity = internRepository.findByPhoneNumber(dto.getPhoneNumber())
+                .orElseThrow(() -> new RegistrationServiceException(ErrorCode.INTERN_NOT_FOUND_ERROR
+                        .getErrorMessage(dto.getPhoneNumber()), ErrorCode.INTERN_NOT_FOUND_ERROR));
         mapper.updateEntityFromDto(dto, entity);
         internRepository.save(entity);
         return mapper.entityToDto(entity);

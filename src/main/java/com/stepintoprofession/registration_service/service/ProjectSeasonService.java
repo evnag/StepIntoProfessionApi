@@ -30,13 +30,17 @@ public class ProjectSeasonService {
     }
 
     public ResponseEntity<Void> delete(UUID id) {
-        ProjectSeason season = seasonRepository.findById(id).orElseThrow(() -> new RegistrationServiceException("Season with id: " + id + " not found", ErrorCode.NOT_FOUND_ERROR));
+        ProjectSeason season = seasonRepository.findById(id)
+                .orElseThrow(() -> new RegistrationServiceException(ErrorCode.SEASON_NOT_FOUND_ERROR
+                        .getErrorMessage(id.toString()), ErrorCode.SEASON_NOT_FOUND_ERROR));
         seasonRepository.delete(season);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     public ProjectSeasonDto updateSeason(ProjectSeasonDto dto) {
-        ProjectSeason entity = seasonRepository.findBySeasonNumber(dto.getSeasonNumber()).orElseThrow(() -> new RegistrationServiceException("Season with number: " + dto.getSeasonNumber() + " not found", ErrorCode.NOT_FOUND_ERROR));
+        ProjectSeason entity = seasonRepository.findBySeasonNumber(dto.getSeasonNumber())
+                .orElseThrow(() -> new RegistrationServiceException(ErrorCode.SEASON_NOT_FOUND_ERROR
+                        .getErrorMessage(dto.getSeasonNumber().toString()), ErrorCode.SEASON_NOT_FOUND_ERROR));
         mapper.updateEntityFromDto(dto, entity);
         seasonRepository.save(entity);
         return mapper.entityToDto(entity);

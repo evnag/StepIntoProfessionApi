@@ -30,7 +30,9 @@ public class MentorService {
     }
 
     public ResponseEntity<Void> delete(UUID id) {
-        MentorEntity mentor = mentorRepository.findById(id).orElseThrow(() -> new RegistrationServiceException("Mentor with id: " + id + " not found", ErrorCode.NOT_FOUND_ERROR));
+        MentorEntity mentor = mentorRepository.findById(id)
+                .orElseThrow(() -> new RegistrationServiceException(ErrorCode.MENTOR_NOT_FOUND_ERROR
+                        .getErrorMessage(id.toString()), ErrorCode.MENTOR_NOT_FOUND_ERROR));
         mentorRepository.delete(mentor);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -40,12 +42,15 @@ public class MentorService {
         if (entityList != null) {
             return mapper.listToListDto(entityList);
         } else {
-            throw new RegistrationServiceException("No matches found", ErrorCode.NO_MATCHES_FOUND_ERROR);
+            throw new RegistrationServiceException(ErrorCode.NO_MATCHES_FOUND_ERROR
+                    .getErrorMessage(""), ErrorCode.NO_MATCHES_FOUND_ERROR);
         }
     }
 
     public MentorDto updateMentor(MentorDto dto) {
-        MentorEntity entity = mentorRepository.findByPhoneNumber(dto.getPhoneNumber()).orElseThrow(() -> new RegistrationServiceException("Mentor with phone number: " + dto.getPhoneNumber() + " not found", ErrorCode.NOT_FOUND_ERROR));
+        MentorEntity entity = mentorRepository.findByPhoneNumber(dto.getPhoneNumber())
+                .orElseThrow(() -> new RegistrationServiceException(ErrorCode.MENTOR_NOT_FOUND_ERROR
+                        .getErrorMessage(dto.getPhoneNumber()), ErrorCode.MENTOR_NOT_FOUND_ERROR));
         mapper.updateEntityFromDto(dto, entity);
         mentorRepository.save(entity);
         return mapper.entityToDto(entity);
