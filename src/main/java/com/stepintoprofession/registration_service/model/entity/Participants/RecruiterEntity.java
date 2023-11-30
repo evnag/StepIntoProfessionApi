@@ -12,8 +12,8 @@ import lombok.experimental.SuperBuilder;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -27,9 +27,9 @@ import java.util.List;
 @Validated
 public class RecruiterEntity extends BaseEntity {
 
-    @NotNull
+    @NotBlank
     private String internship;
-    @NotNull
+    @NotBlank
     private String company;
 
     @OneToOne(cascade = CascadeType.ALL)

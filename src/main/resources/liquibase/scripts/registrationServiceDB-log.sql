@@ -214,3 +214,17 @@ alter table project
 -- changeSet evnag:19
 alter table project
     add column end_date date;
+
+-- changeSet evnag:20
+create table team
+(
+    id        uuid  not null primary key,
+    intern_id uuid,
+    mentor_id uuid,
+    recruiter_id uuid,
+    internship text,
+    season_number int not null,
+    constraint fk_team_intern_id foreign key (intern_id) references intern (id),
+    constraint fk_team_mentor_id foreign key (mentor_id) references mentor (id),
+    constraint fk_team_recruiter_id foreign key (recruiter_id) references recruiter (id)
+);
