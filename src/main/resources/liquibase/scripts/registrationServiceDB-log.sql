@@ -228,3 +228,8 @@ create table team
     constraint fk_team_mentor_id foreign key (mentor_id) references mentor (id),
     constraint fk_team_recruiter_id foreign key (recruiter_id) references recruiter (id)
 );
+
+-- changeSet evnag:21
+alter table recruiter
+    drop constraint fk_recruiter_intern_id,
+    add constraint fk_recruiter_intern_id foreign key (intern_id) references intern (id);
