@@ -1,0 +1,59 @@
+package com.stepintoprofession.registration_service.service;
+
+import com.stepintoprofession.registration_service.exception.ErrorCode;
+import com.stepintoprofession.registration_service.exception.RegistrationServiceException;
+import com.stepintoprofession.registration_service.mapper.InternMapper;
+import com.stepintoprofession.registration_service.model.dto.InternDto;
+import com.stepintoprofession.registration_service.model.entity.Participants.InternEntity;
+import com.stepintoprofession.registration_service.repository.InternRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.UUID;
+
+@Service
+@RequiredArgsConstructor
+public class InternService {
+
+    private final InternRepository internRepository;
+    private final InternMapper mapper;
+
+    public InternDto save(InternDto dto) {
+        return mapper.entityToDto(internRepository.save(mapper.dtoToEntity(dto)));
+    }
+
+    public List<InternDto> findALL() {
+        return mapper.listToListDto(internRepository.findAll());
+    }
+
+    public ResponseEntity<Void> delete(UUID id) {
+        InternEntity intern = internRepository.findById(id)
+                .orElseThrow(() -> new RegistrationServiceException(ErrorCode.INTERN_NOT_FOUND_ERROR
+                        .getErrorMessage(id.toString()), ErrorCode.INTERN_NOT_FOUND_ERROR));
+        internRepository.delete(intern);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    public List<InternDto> findByInternShip(String internship) {
+        List<InternEntity> entityList = internRepository.findByInternship(internship);
+        if (entityList != null) {
+            return mapper.listToListDto(entityList);
+        } else {
+            throw new RegistrationServiceException(ErrorCode.NO_MATCHES_FOUND_ERROR
+                    .getErrorMessage(""), ErrorCode.NO_MATCHES_FOUND_ERROR);
+        }
+    }
+
+    public InternDto updateIntern(InternDto dto) {
+        InternEntity entity = internRepository.findByPhoneNumber(dto.getPhoneNumber())
+                .orElseThrow(() -> new RegistrationServiceException(ErrorCode.INTERN_NOT_FOUND_ERROR
+                        .getErrorMessage(dto.getPhoneNumber()), ErrorCode.INTERN_NOT_FOUND_ERROR));
+        mapper.updateEntityFromDto(dto, entity);
+        internRepository.save(entity);
+        return mapper.entityToDto(entity);
+    }
+
+}
